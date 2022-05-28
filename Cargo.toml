@@ -1,0 +1,26 @@
+[package]
+name = "files-config-gen"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "3.1", features = ["derive"] }
+rocket = { version = "0.5.0-rc.2", optional = true }
+reqwest = { version = "0.11", optional = true, features = ["blocking"] }
+serde = { version = "1.0", optional = true, features = ["derive"] }
+serde_json = { version = "1.0", optional = true }
+open = { version = "2.1", optional = true }
+files-config-types = { git = "https://github.com/SCJangra/files-config-types.git", optional = true }
+
+[features]
+google_drive = [
+  "rocket",
+  "reqwest",
+  "serde",
+  "serde_json",
+  "open",
+  "files-config-types?/google_drive",
+]
