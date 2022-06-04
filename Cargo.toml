@@ -13,14 +13,6 @@ reqwest = { version = "0.11", optional = true, features = ["blocking"] }
 serde = { version = "1.0", optional = true, features = ["derive"] }
 serde_json = { version = "1.0", optional = true }
 open = { version = "2.1", optional = true }
-files-config-types = { git = "https://github.com/SCJangra/files-config-types.git", optional = true }
 
 [features]
-google_drive = [
-  "rocket",
-  "reqwest",
-  "serde",
-  "serde_json",
-  "open",
-  "files-config-types?/google_drive",
-]
+google_drive = ["rocket", "reqwest", "serde", "serde_json", "open"]

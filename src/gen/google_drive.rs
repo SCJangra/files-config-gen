@@ -1,11 +1,10 @@
 mod server;
-
-use std::time::{Duration, UNIX_EPOCH};
+mod types;
 
 use crate::scan;
 use anyhow::Context;
-use files_config_types::google_drive::*;
 use reqwest::{blocking::Client, Url};
+use types::*;
 
 const AUTH_URI: &str = "https://accounts.google.com/o/oauth2/auth";
 const TOKEN_URI: &str = "https://oauth2.googleapis.com/token";
@@ -43,15 +42,8 @@ pub fn gd() -> anyhow::Result<String> {
     let token: Token =
         serde_json::from_str(&res).with_context(|| "Could not deserialize access token")?;
 
-    let expires_at = UNIX_EPOCH
-        .elapsed()
-        .with_context(|| "Time went backwards!")?
-        + Duration::from_secs(token.expires_in);
-
     let config = serde_json::to_string_pretty(&Config {
-        access_token: token.access_token,
         refresh_token: token.refresh_token,
-        expires_at: expires_at.as_secs(),
         client_id,
         client_secret,
     })

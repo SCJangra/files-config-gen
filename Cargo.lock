@@ -359,20 +359,11 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
- "files-config-types",
  "open",
  "reqwest",
  "rocket",
  "serde",
  "serde_json",
-]
-
-[[package]]
-name = "files-config-types"
-version = "0.1.0"
-source = "git+https://github.com/SCJangra/files-config-types.git#94c57ac3b40d89b40c025a4ccf5e46ebe531667d"
-dependencies = [
- "serde",
 ]
 
 [[package]]
